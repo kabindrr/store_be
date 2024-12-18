@@ -1,0 +1,5 @@
+@rootURL = http://localhost:8000
+
+###
+GET {{rootURL}}
+
