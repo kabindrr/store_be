@@ -5,7 +5,7 @@
   "repository": "https://github.com/kabindrr/store_be.git",
   "author": "kabindrr <chaina_kabindra@yahoo.com>",
   "license": "MIT",
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
     "start": "node --env-file=.env server.js",
     "dev": "nodemon --env-file=.env server.js"
