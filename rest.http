@@ -10,9 +10,9 @@ POST {{rootURL}}/api/v1/auth/register
 Content-Type: application/json
 
 {
-    "fName":"a",
-    "lName":"b",
+    "fName":"kabi",
+    "lName":"rb",
     "phone":"1234567890",
-    "email":"a@gmail.com",
+    "email":"g@gmail.com",
     "password":"as"
 }
