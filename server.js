@@ -3,9 +3,13 @@ import morgan from "morgan";
 import cors from "cors";
 import { ResponseClient } from "./src/middlewares/ResponseClient.js";
 import { errorHandler } from "./src/middlewares/ErrorHandler.js";
+import { Mongo_Db_Connection } from "./src/config/mongoConfig.js";
 
 const app = express();
 const PORT = 8000;
+
+//Database connection with MongoDb
+Mongo_Db_Connection();
 
 //middlewares
 app.use(cors());
