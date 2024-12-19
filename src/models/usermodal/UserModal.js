@@ -4,6 +4,6 @@ export const addUser = (obj) => {
   return UserSchema(obj).save();
 };
 
-export const getUser = (email) => {
+export const readUser = (email) => {
   return UserSchema.findOne({ email });
 };

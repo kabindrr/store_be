@@ -1,10 +1,12 @@
 import { ResponseClient } from "../middlewares/ResponseClient.js";
 import { createNewSession } from "../models/sessions/SessionModal.js";
-import { addUser } from "../models/usermodal/UserModal.js";
+import { addUser, readUser } from "../models/usermodal/UserModal.js";
 import { UserActivationURLEmail } from "../services/EmailServices.js";
-import { hashPassword } from "../utils/bcrypt.js";
+import { comparePassword, hashPassword } from "../utils/bcrypt.js";
 import { v4 as uuidv4 } from "uuid";
+import { Sign_Access_JWT } from "../utils/JWT.js";
 
+//create new user
 export const insertUser = async (req, res, next) => {
   try {
     //encrypt password with bcryptjs and save in data base
@@ -43,5 +45,47 @@ export const insertUser = async (req, res, next) => {
       error.statusCode = 400;
     }
     next(error);
+  }
+};
+
+//login user
+export const getUser = async (req, res, next) => {
+  try {
+    //get user email
+    const { email, password } = req.body;
+    console.log(email, password);
+
+    const user = await readUser(email);
+
+    //verify the password
+    if (user?._id) {
+      const isPasswordCorrect = comparePassword(password, user.password);
+
+      if (isPasswordCorrect) {
+        const JWT_TOOKEN = Sign_Access_JWT({ email: email });
+        user.password = undefined;
+
+        //user authenticated
+        if (email && password) {
+          res.json({
+            status: "success",
+            message: "login success",
+            user,
+            JWT_TOOKEN,
+          });
+        }
+        return;
+      }
+    }
+
+    res.status(401).json({
+      status: "error",
+      error: "Invalid email and password",
+    });
+  } catch (error) {
+    res.json({
+      status: "error",
+      message: error.message,
+    });
   }
 };

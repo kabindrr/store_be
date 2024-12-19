@@ -16,3 +16,13 @@ Content-Type: application/json
     "email":"g@gmail.com",
     "password":"as"
 }
+
+
+###
+POST {{rootURL}}/api/v1/auth/login
+Content-Type: application/json
+
+{
+    "email":"g@gmail.com",
+    "password":"as"
+}
