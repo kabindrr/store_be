@@ -1,5 +1,4 @@
 import bcryptjs from "bcryptjs";
-import e from "express";
 
 const saltRound = 5;
 
